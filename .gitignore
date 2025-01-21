@@ -1,0 +1,7 @@
+# Ignore guidelines file
+/*guidelines*.pdf
+
+frames/
+
+*/.DS_Store
+.DS_Store
