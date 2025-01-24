@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import os
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 
 def ratio_test(matches, ratio_test=0.6) -> list:
@@ -35,9 +36,9 @@ FIGSIZE_HEIGHT = int(os.getenv("FIGSIZE_HEIGHT", 10))
 figsize = (FIGSIZE_WIDTH, FIGSIZE_HEIGHT)
 
 MEDIA_DIR = os.path.join(ROOT_DIR, "media")
-TEMPLATE_IMAGE_PATH = os.path.join(MEDIA_DIR, "template_image_updated.jpg")
+TEMPLATE_IMAGE_PATH = os.path.join(MEDIA_DIR, "image_template.jpg")
 # TEMPLATE_IMAGE_PATH = os.path.join(MEDIA_DIR, "test_template.DNG")
-INPUT_VIDEO_PATH = os.path.join(MEDIA_DIR, "input.mp4")
+INPUT_VIDEO_PATH = os.path.join(MEDIA_DIR, "picture_input.mp4")
 
 rgb_template = cv2.imread(TEMPLATE_IMAGE_PATH, cv2.COLOR_BGR2RGB)
 gray_template = cv2.imread(TEMPLATE_IMAGE_PATH, cv2.COLOR_RGB2GRAY)
@@ -74,10 +75,10 @@ frame_height = int(input_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 template_height, template_width = rgb_template.shape[:2]
 template_corners = np.float32(
     [
-        [template_width * 0.04, template_height * 0.01],
-        [template_width * 0.98, template_height * 0.01],
-        [template_width * 0.995, template_height * 0.995],
-        [template_width * 0.01, template_height * 0.995],
+        [template_width * 0.08, template_height * 0.04],
+        [template_width * 0.95, template_height * 0.04],
+        [template_width * 0.96, template_height * 0.93],
+        [template_width * 0.12, template_height * 0.955],
     ]
 ).reshape(-1, 1, 2)
 if DEBUG:
@@ -260,6 +261,7 @@ while True:
         frame_index += 1
     except Exception as e:
         out_writer.write(frame)
+
 # ======== end all
 # Release and close
 input_cap.release()

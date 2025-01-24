@@ -5,4 +5,4 @@ frames/
 
 */.DS_Store
 .DS_Store
-./media/output_overlay
+/media/*output*
